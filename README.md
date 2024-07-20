@@ -35,10 +35,10 @@ cd golly-examples
 
 This repository is organized by individual libraries within Golly. Each directory contains examples specific to a particular library. Below is a list of the available examples:
 
-- turbo
+- [turbo](/turbo/README.md)
     - Description: Lightweight HTTP Router
     - Examples
-        - `simple-server`: A simple server to process HTTP requests
+        - [`simple-server`](/turbo//simple-server/server.go): A simple server to process HTTP requests
 
 ### Contributing
 
