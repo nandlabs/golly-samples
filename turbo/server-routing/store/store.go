@@ -6,8 +6,15 @@ type Store struct {
 	data map[string]models.Item
 }
 
+var initStore *Store
+
 func NewStore() *Store {
-	return &Store{data: make(map[string]models.Item)}
+	initStore = &Store{data: make(map[string]models.Item)}
+	return initStore
+}
+
+func GetStore() *Store {
+	return initStore
 }
 
 func (s *Store) GetAll() []models.Item {

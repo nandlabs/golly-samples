@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// register the router by creating the turbo object
+	// register the router by creating the server object
 	restServer, err := server.Default()
 	if err != nil {
 		panic(err)

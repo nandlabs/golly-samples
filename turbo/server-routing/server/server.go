@@ -1,13 +1,10 @@
 package server
 
 import (
-	"log"
-	"net/http"
-	"time"
-
 	"github.com/nandlabs/golly-samples/turbo/server-routing/handlers"
 	"github.com/nandlabs/golly-samples/turbo/server-routing/store"
-	"oss.nandlabs.io/golly/turbo"
+	"oss.nandlabs.io/golly/lifecycle"
+	"oss.nandlabs.io/golly/rest/server"
 )
 
 type Server struct {
@@ -21,24 +18,29 @@ func NewServer() *Server {
 }
 
 func (s *Server) Start() {
-	router := turbo.NewRouter()
+
+	// register the router by creating the server object
+	restServer, err := server.Default()
+	if err != nil {
+		panic(err)
+	}
+
+	// Add path prefix if you want
+	restServer.Opts().PathPrefix = "/api/v1"
 
 	// register routes
-	router.Get("/api/v1/users", handlers.GetUsers(s.store))
-	router.Post("/api/v1/users", handlers.AddUser(s.store))
-	router.Put("/api/v1/users/:id", handlers.UpdateUser(router, s.store))
-	router.Delete("/api/v1/users/:id", handlers.DeleteUser(router, s.store))
+	restServer.Get("/users", handlers.GetUsers)
+	restServer.Post("/users", handlers.AddUser)
+	restServer.Put("/users/:id", handlers.UpdateUser)
+	restServer.Delete("/users/:id", handlers.DeleteUser)
 
-	srv := &http.Server{
-		Handler:      router,
-		Addr:         ":8080",
-		ReadTimeout:  20 * time.Second,
-		WriteTimeout: 20 * time.Second,
-	}
+	// create the http.Server object and register the router as Handler
+	// provide the necessary configurations such as PORT, ReadTimeout, WriteTimeout...
+	manager := lifecycle.NewSimpleComponentManager()
 
-	// to start the server, invoke the ListenAndServe method
-	if err := srv.ListenAndServe(); err != nil {
-		// We will use our inbuilt logger in future examples
-		log.Fatalln(err)
-	}
+	// Register the server
+	manager.Register(restServer)
+
+	// start the server
+	manager.StartAndWait()
 }
