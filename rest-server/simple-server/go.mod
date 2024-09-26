@@ -1,4 +1,4 @@
-module github.com/nandlabs/golly-samples/turbo/simple-server
+module github.com/nandlabs/golly-samples/rest-server/simple-server
 
 go 1.22.4
 

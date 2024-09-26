@@ -1,8 +1,8 @@
 package server
 
 import (
-	"github.com/nandlabs/golly-samples/turbo/server-routing/handlers"
-	"github.com/nandlabs/golly-samples/turbo/server-routing/store"
+	"github.com/nandlabs/golly-samples/rest-server/server-routing/handlers"
+	"github.com/nandlabs/golly-samples/rest-server/server-routing/store"
 	"oss.nandlabs.io/golly/lifecycle"
 	"oss.nandlabs.io/golly/rest/server"
 )

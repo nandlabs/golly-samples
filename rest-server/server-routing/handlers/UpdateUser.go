@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/nandlabs/golly-samples/turbo/server-routing/models"
-	"github.com/nandlabs/golly-samples/turbo/server-routing/response"
-	"github.com/nandlabs/golly-samples/turbo/server-routing/store"
+	"github.com/nandlabs/golly-samples/rest-server/server-routing/models"
+	"github.com/nandlabs/golly-samples/rest-server/server-routing/response"
+	"github.com/nandlabs/golly-samples/rest-server/server-routing/store"
 	"oss.nandlabs.io/golly/rest/server"
 )
 

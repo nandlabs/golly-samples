@@ -1,6 +1,6 @@
 package store
 
-import "github.com/nandlabs/golly-samples/turbo/server-routing/models"
+import "github.com/nandlabs/golly-samples/rest-server/server-routing/models"
 
 type Store struct {
 	data map[string]models.Item

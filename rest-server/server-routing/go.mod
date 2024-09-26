@@ -1,4 +1,4 @@
-module github.com/nandlabs/golly-samples/turbo/server-routing
+module github.com/nandlabs/golly-samples/rest-server/server-routing
 
 go 1.22.4
 

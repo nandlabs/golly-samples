@@ -35,10 +35,11 @@ cd golly-examples
 
 This repository is organized by individual libraries within Golly. Each directory contains examples specific to a particular library. Below is a list of the available examples:
 
-- [turbo](/turbo/README.md)
+- [rest-server](/rest-server/README.md)
     - Description: Lightweight HTTP Router
     - Examples
-        - [`simple-server`](/turbo//simple-server/server.go): A simple server to process HTTP requests
+        - [`simple-server`](/rest-server/simple-server/server.go): A simple server to process HTTP requests
+        - [`server-routing`](/rest-server/server-routing/main.go): A full example of a REST API built using rest library from golly
 
 ### Contributing
 
