@@ -1,36 +1,37 @@
 package main
 
 import (
-	"log"
 	"net/http"
-	"time"
 
-	"oss.nandlabs.io/golly/turbo"
+	"oss.nandlabs.io/golly/lifecycle"
+	"oss.nandlabs.io/golly/rest/server"
 )
 
 func main() {
 	// register the router by creating the turbo object
-	router := turbo.NewRouter()
+	restServer, err := server.Default()
+	if err != nil {
+		panic(err)
+	}
+
+	// Add path prefix if you want
+	restServer.Opts().PathPrefix = "/api/v1"
 
 	// add a GET endpoint to your server by providing the "endpoint" and handler function
-	router.Get("/api/v1/healthz", healthCheck)
+	restServer.Get("/healthz", healthCheck)
 
 	// create the http.Server object and register the router as Handler
 	// provide the necessary configurations such as PORT, ReadTimeout, WriteTimeout...
-	srv := &http.Server{
-		Handler:      router,
-		Addr:         ":8080",
-		ReadTimeout:  20 * time.Second,
-		WriteTimeout: 20 * time.Second,
-	}
+	manager := lifecycle.NewSimpleComponentManager()
 
-	// to start the server, invoke the ListenAndServe method
-	if err := srv.ListenAndServe(); err != nil {
-		log.Fatalln(err)
-	}
+	// Register the server
+	manager.Register(restServer)
+
+	// start the server
+	manager.StartAndWait()
 }
 
-func healthCheck(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("server is up and running"))
-	w.WriteHeader(http.StatusOK)
+func healthCheck(ctx server.Context) {
+	ctx.HttpResWriter().Write([]byte("server is up and running"))
+	ctx.HttpResWriter().WriteHeader(http.StatusOK)
 }
