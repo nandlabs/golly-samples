@@ -7,11 +7,11 @@ import (
 	"github.com/nandlabs/golly-samples/rest-server/server-routing/models"
 	"github.com/nandlabs/golly-samples/rest-server/server-routing/response"
 	"github.com/nandlabs/golly-samples/rest-server/server-routing/store"
-	"oss.nandlabs.io/golly/rest/server"
+	"oss.nandlabs.io/golly/rest"
 )
 
-func UpdateUser(ctx server.Context) {
-	pathId, err := ctx.GetParam("id", server.PathParam)
+func UpdateUser(ctx rest.ServerContext) {
+	pathId, err := ctx.GetParam("id", rest.PathParam)
 	if err != nil {
 		response.Error(ctx.HttpResWriter(), http.StatusBadRequest, "path params not found")
 		return

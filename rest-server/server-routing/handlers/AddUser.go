@@ -7,11 +7,11 @@ import (
 	"github.com/nandlabs/golly-samples/rest-server/server-routing/models"
 	"github.com/nandlabs/golly-samples/rest-server/server-routing/response"
 	"github.com/nandlabs/golly-samples/rest-server/server-routing/store"
-	"oss.nandlabs.io/golly/rest/server"
+	"oss.nandlabs.io/golly/rest"
 	"oss.nandlabs.io/golly/uuid"
 )
 
-func AddUser(ctx server.Context) {
+func AddUser(ctx rest.ServerContext) {
 	var item models.Item
 	if err := json.NewDecoder(ctx.GetRequest().Body).Decode(&item); err != nil {
 		response.Error(ctx.HttpResWriter(), http.StatusBadRequest, "invalid request payload")

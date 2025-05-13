@@ -4,7 +4,7 @@ import (
 	"github.com/nandlabs/golly-samples/rest-server/server-routing/handlers"
 	"github.com/nandlabs/golly-samples/rest-server/server-routing/store"
 	"oss.nandlabs.io/golly/lifecycle"
-	"oss.nandlabs.io/golly/rest/server"
+	"oss.nandlabs.io/golly/rest"
 )
 
 type Server struct {
@@ -20,7 +20,7 @@ func NewServer() *Server {
 func (s *Server) Start() {
 
 	// register the router by creating the server object
-	restServer, err := server.Default()
+	restServer, err := rest.DefaultServer()
 	if err != nil {
 		panic(err)
 	}
